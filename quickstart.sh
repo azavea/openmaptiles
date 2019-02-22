@@ -155,6 +155,13 @@ else
     echo " "
     echo "-------------------------------------------------------------------------------------"
     echo "====> : The testdata ./data/$testdata exists, we don't need to download! "
+    echo " "
+    echo "-------------------------------------------------------------------------------------"
+    echo "====> : Generate ./data/docker-compose-config.yml!"
+    docker-compose run --rm \
+      -e MIN_ZOOM=${MIN_ZOOM:-0} \
+      -e MAX_ZOOM=${MAX_ZOOM:-14} \
+      import-osm /scripts/generate-vectortiles-config.sh "${osm_area}"
 fi
 
 

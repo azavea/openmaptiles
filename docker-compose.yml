@@ -37,6 +37,7 @@ services:
     volumes:
      - ./data:/import
      - ./build:/mapping
+     - ./scripts:/scripts
      - cache:/cache
   import-osmborder:
     image: "openmaptiles/import-osmborder:0.4"
@@ -59,7 +60,9 @@ services:
     image: "openmaptiles/import-osm:0.5"
     env_file: .env
     environment:
-      DIFF_MODE: ${DIFF_MODE}
+      - DIFF_MODE
+      - MIN_ZOOM
+      - MAX_ZOOM
     command: ./import_update.sh
     networks:
     - postgres_conn
